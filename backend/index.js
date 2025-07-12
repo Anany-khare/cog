@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import express, { urlencoded } from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
@@ -36,7 +36,7 @@ app.listen(PORT, () => {
     console.log(`Server at port ${PORT}`);  
     connectDB()
 })
-=======
+
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -107,4 +107,4 @@ server.listen(PORT, () => {
     console.log(`Server at port ${PORT}`);  
   });
 });
->>>>>>> d997b8b (Initial commit: project ready for deployment)
+
