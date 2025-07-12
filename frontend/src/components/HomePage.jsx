@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
-import axios from 'axios';
-import HomePageGamer from './HomePageGamer';
-import HomePageHost from './HomePageHost';
-import HomePageOrg from './HomePageOrg';
-import { useDispatch } from 'react-redux';
-import { setAuthUser } from '../redux/authSlice';
-=======
 import API, { logoutUser } from '../api';
 import HomePageGamer from './HomePageGamer';
 import HomePageHost from './HomePageHost';
@@ -18,45 +10,11 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import RightPane from './RightPane';
 import './../assets/HomePage.css';
->>>>>>> d997b8b (Initial commit: project ready for deployment)
 
 function HomePage() {
   const [role, setRole] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-<<<<<<< HEAD
-
-  useEffect(() => {
-    const cookies = document.cookie.split(';').find(cookie => cookie.trim().startsWith('user='));
-    if (cookies) {
-      try {
-        const user = JSON.parse(decodeURIComponent(cookies.split('=')[1])); 
-        if (user.role) {
-          setRole(user.role);
-          dispatch(setAuthUser(user)); // Dispatch user to Redux state
-        }
-      } catch (error) {
-        console.error('Failed to parse user cookie:', error);
-        navigate('/auth');
-      }
-    } else {
-      navigate('/auth');
-    }
-  }, [navigate, dispatch]);
-
-  const handleLogout = async () => {
-    try {
-      const res = await axios.get('http://localhost:8000/api/v1/user/logout', { withCredentials: true });
-      if (res.data.status) {
-        document.cookie = 'user=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-        dispatch(setAuthUser(null)); // Clear user from Redux state
-        navigate('/auth');
-      }
-    } catch (error) {
-      console.error('Logout failed:', error.response?.data?.message || error.message);
-    }
-  };
-=======
   const user = useSelector(state => state.auth.user);
 
   useEffect(() => {
@@ -81,20 +39,11 @@ function HomePage() {
       }
     })();
   }, [user, navigate, dispatch]);
->>>>>>> d997b8b (Initial commit: project ready for deployment)
 
   if (!role) {
     return <div>Loading...</div>;
   }
 
-<<<<<<< HEAD
-  return (
-    <div>
-      {role === 'gamer' && <HomePageGamer />}
-      {role === 'host' && <HomePageHost />}
-      {role === 'org' && <HomePageOrg />}
-      <button onClick={handleLogout}>Logout</button>
-=======
   const validRoles = ['gamer', 'host', 'org'];
   if (!validRoles.includes(role)) {
     return <div style={{ color: 'red', padding: 32, textAlign: 'center' }}>Unknown user role: <b>{role}</b>. Please contact support or try logging out and in again.</div>;
@@ -234,7 +183,6 @@ function HomePage() {
           }
         }
       `}</style>
->>>>>>> d997b8b (Initial commit: project ready for deployment)
     </div>
   );
 }

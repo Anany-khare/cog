@@ -21,15 +21,12 @@ const authSlice = createSlice({
         },
         setSelectedUser:(state,action) => {
             state.selectedUser = action.payload;
-<<<<<<< HEAD
-=======
         },
         logout:(state) => {
             state.user = null;
             state.suggestedUsers = [];
             state.userProfile = null;
             state.selectedUser = null;
->>>>>>> d997b8b (Initial commit: project ready for deployment)
         }
     }
 });
@@ -38,9 +35,6 @@ export const {
     setSuggestedUsers, 
     setUserProfile,
     setSelectedUser,
-<<<<<<< HEAD
-=======
     logout,
->>>>>>> d997b8b (Initial commit: project ready for deployment)
 } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-import { Link } from 'react-router-dom'
-
-function HomePageOrg() {
-  return (
-    <div>HomePageOrg
-    <Link to='/chat'>
-    <button>chat</button>
-    </Link>
-  </div>
-  )
-}
-
-export default HomePageOrg
-=======
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPostsPage, addPostRealtime, updatePostLike, addCommentRealtime, updateCommentLike } from '../redux/postSlice';
@@ -281,4 +265,3 @@ if (typeof document !== 'undefined') {
 }
 
 export default HomePageOrg;
->>>>>>> d997b8b (Initial commit: project ready for deployment)

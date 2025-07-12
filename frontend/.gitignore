@@ -22,8 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-<<<<<<< HEAD
-=======
 
 # Environment variables
 .env
@@ -33,4 +31,3 @@ dist-ssr
 build
 coverage
 .cache
->>>>>>> d997b8b (Initial commit: project ready for deployment)

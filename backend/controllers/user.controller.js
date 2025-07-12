@@ -20,18 +20,10 @@ export const register = async(req,res) =>{
                 success:false
             })
         }
-<<<<<<< HEAD
-        const hashpassword = await bcrypt.hash(password,5)
-        await User.create({
-            username,
-            email,
-            password:hashpassword,
-=======
         await User.create({
             username,
             email,
             password,
->>>>>>> d997b8b (Initial commit: project ready for deployment)
             role
         })
         return res.status(201).json({
@@ -39,16 +31,12 @@ export const register = async(req,res) =>{
             success:true
         })
     } catch (error) {
-<<<<<<< HEAD
-        console.log(error)
-=======
         console.log(error);
         return res.status(500).json({
             message:"Something went wrong during registration.",
             success:false,
             error: error.message
         })
->>>>>>> d997b8b (Initial commit: project ready for deployment)
     }
 }
 export const login = async(req,res) =>{
@@ -67,56 +55,14 @@ export const login = async(req,res) =>{
                 success:false
             })
         }
-<<<<<<< HEAD
-        let checkpassword=await bcrypt.compare(password,user.password)
-        if(!checkpassword){
-=======
         const isMatch = await user.comparePassword(password);
         if(!isMatch){
->>>>>>> d997b8b (Initial commit: project ready for deployment)
             return res.status(401).json({
                 message:"Invalid email or password",
                 success:false
             })
         }
         const token = jwt.sign({id:user._id},process.env.SECRET_KEY,{expiresIn:'1d'})
-<<<<<<< HEAD
-        // console.log('Generated Token:', token);
-        const populatedPosts = await Promise.all(
-            user.posts.map( async (postId) => {
-                const post = await Post.findById(postId);
-                if(post.author.equals(user._id)){
-                    return post;
-                }
-                return null;
-            })
-        )
-        user = {
-            _id: user._id,
-            username: user.username,
-            email: user.email,
-            profilePicture: user.profilepic,
-            tags: user.tags,
-            followers: user.followers,
-            following: user.following,
-            posts: populatedPosts.filter(post => post !== null), 
-            role: user.role
-        }
-        
-        // res.cookie('token', token, { sameSite: 'strict', maxAge: 1 * 24 * 60 * 60 * 1000 });
-        res.cookie('token', token, { 
-            httpOnly: true, 
-            sameSite: 'strict', 
-            maxAge: 1 * 24 * 60 * 60 * 1000 // 1 day
-          });
-          
-          // Send the JSON response
-          return res.json({
-            message: `Hello ${user.username}, Welcome back!`,
-            success: true,
-            user
-          });
-=======
         
         // Return complete user data including all profile fields
         const userResponse = {
@@ -150,7 +96,6 @@ export const login = async(req,res) =>{
             user: userResponse,
             token: token // Include token in response for localStorage
         })
->>>>>>> d997b8b (Initial commit: project ready for deployment)
           
     } catch(error){
         console.error(error);
@@ -163,10 +108,6 @@ export const login = async(req,res) =>{
 }
 export const getProfile = async (req, res) => {
     try {
-<<<<<<< HEAD
-        const userId = req.params.id;
-        let user = await User.findById(userId).populate({path:'posts', createdAt:-1}).populate('bookmarks');
-=======
         const userId = req.params.id || req.id; // Use params.id if provided, otherwise use req.id (current user)
         let user = await User.findById(userId).populate({path:'posts', createdAt:-1}).populate('bookmarks');
         
@@ -177,31 +118,23 @@ export const getProfile = async (req, res) => {
             });
         }
         
->>>>>>> d997b8b (Initial commit: project ready for deployment)
         return res.status(200).json({
             user,
             success: true
         });
     } catch (error) {
         console.log(error);
-<<<<<<< HEAD
-=======
         return res.status(500).json({
             message:"Something went wrong while getting profile.",
             success:false,
             error: error.message
         });
->>>>>>> d997b8b (Initial commit: project ready for deployment)
     }
 };
 export const logout = async (req, res) => {
     try {
-<<<<<<< HEAD
-      res.cookie('token', '', { httpOnly: true, sameSite: 'strict', maxAge: 0 }); // Clear the token cookie
-=======
       res.cookie('token', '', { httpOnly: true, sameSite: 'lax', maxAge: 0 }); // Clear the token cookie
       res.cookie('user', '', { httpOnly: false, sameSite: 'lax', maxAge: 0 }); // Clear the user cookie
->>>>>>> d997b8b (Initial commit: project ready for deployment)
       return res.json({ message: 'Logout successful', status: true });
     } catch (error) {
       return res.status(500).json({ message: 'Logout failed', status: false });
@@ -212,27 +145,6 @@ export const logout = async (req, res) => {
 export const editProfile = async (req, res) => {
     try {
         const userId = req.id;
-<<<<<<< HEAD
-        const { tags, gender } = req.body;
-        const profilePicture = req.file;
-        let cloudResponse;
-
-        if (profilePicture) {
-            const fileUri = getDataUri(profilePicture);
-            cloudResponse = await cloudinary.uploader.upload(fileUri);
-        }
-
-        const user = await User.findById(userId).select('-password');
-        if (!user) {
-            return res.status(404).json({
-                message: 'User not found.',
-                success: false
-            });
-        };
-        if (tags) user.tags = tags;
-        if (gender) user.gender = gender;
-        if (profilePicture) user.profilePicture = cloudResponse.secure_url;
-=======
         const {
           tags, gender, bio, location, dob, discord, twitch, youtube, instagram, website,
           valorantRank, bgmiRank, codRank, phone, gameDetails, username, email
@@ -286,7 +198,6 @@ export const editProfile = async (req, res) => {
         } else {
           console.log('No profile picture provided in request');
         }
->>>>>>> d997b8b (Initial commit: project ready for deployment)
 
         await user.save();
 
@@ -297,9 +208,6 @@ export const editProfile = async (req, res) => {
         });
 
     } catch (error) {
-<<<<<<< HEAD
-        console.log(error);
-=======
         console.log('--- editProfile ERROR ---');
         console.log(error);
         if (error && error.stack) console.log(error.stack);
@@ -308,7 +216,6 @@ export const editProfile = async (req, res) => {
             success:false,
             error: error.message
         });
->>>>>>> d997b8b (Initial commit: project ready for deployment)
     }
 };
 export const getSuggestedUsers = async (req, res) => {
@@ -325,40 +232,26 @@ export const getSuggestedUsers = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-<<<<<<< HEAD
-=======
         return res.status(500).json({
             message:"Something went wrong while getting suggested users.",
             success:false,
             error: error.message
         });
->>>>>>> d997b8b (Initial commit: project ready for deployment)
     }
 };
 export const followOrUnfollow = async (req, res) => {
     try {
-<<<<<<< HEAD
-        const follower1 = req.id;
-        const follower2 = req.params.id;
-        if (follower1 === follower2) {
-=======
         const currentUserId = req.id;
         const targetUserId = req.params.id;
         if (currentUserId === targetUserId) {
->>>>>>> d997b8b (Initial commit: project ready for deployment)
             return res.status(400).json({
                 message: 'You cannot follow/unfollow yourself',
                 success: false
             });
         }
 
-<<<<<<< HEAD
-        const user = await User.findById(follower1);
-        const targetUser = await User.findById(follower2);
-=======
         const user = await User.findById(currentUserId);
         const targetUser = await User.findById(targetUserId);
->>>>>>> d997b8b (Initial commit: project ready for deployment)
 
         if (!user || !targetUser) {
             return res.status(400).json({
@@ -367,26 +260,6 @@ export const followOrUnfollow = async (req, res) => {
             });
         }
 
-<<<<<<< HEAD
-        const isFollowing = user.following.includes(follower2);
-        if (isFollowing) {
-            await Promise.all([
-                User.updateOne({ _id: follower1 }, { $pull: { following: follower2 } }),
-                User.updateOne({ _id: follower2 }, { $pull: { followers: follower1 } }),
-            ])
-            return res.status(200).json({ message: 'Unfollowed successfully', success: true });
-        } else {
-            await Promise.all([
-                User.updateOne({ _id: follower1 }, { $push: { following: follower2 } }),
-                User.updateOne({ _id: follower2 }, { $push: { followers: follower1 } }),
-            ])
-            return res.status(200).json({ message: 'followed successfully', success: true });
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-=======
         let isFollowing;
         if (user.following.includes(targetUserId)) {
             // Unfollow
@@ -415,4 +288,3 @@ export const followOrUnfollow = async (req, res) => {
         });
     }
 };
->>>>>>> d997b8b (Initial commit: project ready for deployment)

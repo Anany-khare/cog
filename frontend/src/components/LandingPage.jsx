@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import '../assets/Landingpage.css';
-import { Link } from 'react-router-dom';
-
-const LandingPage = () => {
-  return (
-    <div className="video-container">
-      <video autoPlay loop muted className="background-video">
-        <source src="landingpagebg.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <div className="content">
-        <Link to='/auth'>
-        <button className='btn'>Get Started</button>
-        </Link>
-      </div>
-    </div>
-  );
-};
-
-=======
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
@@ -291,5 +269,4 @@ function LandingPage() {
   );
 }
 
->>>>>>> d997b8b (Initial commit: project ready for deployment)
 export default LandingPage;

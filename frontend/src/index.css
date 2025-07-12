@@ -1,8 +1,5 @@
 @tailwind base;
 @tailwind components;
-<<<<<<< HEAD
-@tailwind utilities;
-=======
 @tailwind utilities;
 
 html, body {
@@ -22,4 +19,3 @@ html, body {
 #root {
   height: 100%;
 }
->>>>>>> d997b8b (Initial commit: project ready for deployment)
