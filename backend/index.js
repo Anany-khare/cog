@@ -17,36 +17,7 @@ import recruitmentRoutes from "./routes/recruitment.route.js";
 const app = express();
 const server = createServer(app);
 
-// Define allowed origins
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:3000',
-  'https://gameverse-cog.vercel.app',
-  'https://gameverse-cog.vercel.app/',
-  process.env.FRONTEND_URL
-].filter(Boolean); // Remove any undefined values
-
-// CORS configuration
-const corsOptions = {
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    // Remove trailing slash for comparison
-    const cleanOrigin = origin.replace(/\/$/, '');
-    const cleanAllowedOrigins = allowedOrigins.map(origin => origin.replace(/\/$/, ''));
-    
-    if (cleanAllowedOrigins.includes(cleanOrigin)) {
-      callback(null, true);
-    } else {
-      console.log('CORS blocked origin:', origin);
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-};
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://gameverse-cog.vercel.app';
 
 // Socket.IO setup with CORS
 const io = new Server(server, {
