@@ -1,0 +1,106 @@
+.create-post-card {
+    background-color: #1f2937;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.create-post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.create-post-form {
+    width: 100%;
+}
+
+.create-post-textarea {
+    width: 100%;
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 80px;
+    margin-bottom: 1rem;
+    color: #f9fafb;
+    background-color: #111827;
+}
+
+.create-post-textarea:focus {
+    outline: none;
+    border-color: #f97316;
+}
+
+.create-post-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create-post-button {
+    background-color: #f97316;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.create-post-button:hover {
+    background-color: #fb923c;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.file-upload-label {
+    border: 1px solid #f97316;
+    color: #f97316;
+    font-weight: 600;
+    border-radius: 9999px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.file-upload-label:hover {
+    background-color: #f97316;
+    color: white;
+}
+
+.image-preview-container {
+    position: relative;
+    margin-bottom: 1rem;
+    max-width: 200px;
+}
+
+.image-preview {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+} 

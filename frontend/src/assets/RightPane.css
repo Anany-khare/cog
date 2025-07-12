@@ -1,0 +1,56 @@
+.right-pane-container {
+    padding: 0;
+    height: 100%;
+}
+
+.right-pane-card {
+    background-color: #1f2937; /* Dark Card Background */
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #9ca3af; /* Secondary text color */
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.user-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-list-item {
+    color: #1d4ed8;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.trending-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.trending-list-item {
+    color: #60a5fa; /* Lighter blue for dark theme */
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.trending-list-item:hover {
+    color: #f97316; /* Orange accent on hover */
+}
+
+.sponsored-text {
+    color: #d1d5db; /* Lighter grey for dark theme */
+    font-size: 0.875rem;
+} 

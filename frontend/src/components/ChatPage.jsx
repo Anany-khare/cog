@@ -1,8 +1,26 @@
+<<<<<<< HEAD
 import React from 'react'
 import { useSelector } from 'react-redux'
 // import SuggestedUsers from './SuggestedUsers';pppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
 function ChatPage() {
   const { user, suggestedUsers} = useSelector(store => store.auth)
+=======
+import React, {useEffect, useState} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setSelectedUser } from '../redux/authSlice';
+import { fetchSuggestedUsers } from '../redux/userSlice';
+
+function ChatPage() {
+  const { user } = useSelector(store => store.auth);
+  const { suggestedUsers, loading, error } = useSelector(store => store.user);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchSuggestedUsers());
+  }, [dispatch])
+
+>>>>>>> d997b8b (Initial commit: project ready for deployment)
   return (
     <div className='flex ml-[16%] h-screen'>
       <section className='w-full md:w-1/4 my-8'>

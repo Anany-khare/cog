@@ -1,0 +1,268 @@
+.post-card {
+    background-color: #1f2937;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    border: 2px solid #f97316;
+}
+
+.author-name {
+    font-weight: 600;
+    color: #f9fafb;
+}
+
+.post-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
+    background: #181c23;
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+    cursor: zoom-in;
+}
+
+.popup-image {
+    max-width: 90vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    border-radius: 1rem;
+    display: block;
+    margin: 0 auto;
+    background: #181c23;
+}
+
+.post-content {
+    padding: 1rem;
+}
+
+.post-caption {
+    margin-bottom: 1rem;
+    color: #d1d5db;
+}
+
+.comments-section {
+    margin-bottom: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.comment {
+    margin-bottom: 0.5rem;
+    color: #9ca3af;
+}
+
+.comment-author {
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+.comment-input-container {
+    display: flex;
+}
+
+.comment-input {
+    flex-grow: 1;
+    border: 1px solid #374151;
+    border-radius: 9999px;
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    background-color: #111827;
+    color: #f9fafb;
+}
+
+.comment-input:focus {
+    outline: none;
+    border-color: #f97316;
+}
+
+.comment-button {
+    background-color: #f97316;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.comment-button:hover {
+    background-color: #fb923c;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #23272f;
+    border-radius: 1rem;
+    padding: 2rem;
+    min-width: 350px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #f97316;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+}
+
+.modal-comments-section {
+    margin-top: 2rem;
+}
+
+.modal-comment-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    background: #181c23;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.modal-comment-text {
+    color: #f9fafb;
+    margin-left: 0.5rem;
+}
+
+.post-card:hover .carousel-nav-btn {
+    opacity: 1;
+}
+
+.carousel-nav-btn {
+    background: #374151;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.carousel-nav-btn:hover {
+    background-color: #f97316 !important;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+    z-index: 3;
+}
+
+.carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+
+.carousel-dot.active {
+    background: #f97316;
+}
+
+.popup-nav-btn {
+    background: rgba(35, 39, 47, 0.73);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-nav-btn:hover {
+    background: #f97316;
+} 
+
+/* Remove focus borders from all buttons */
+button:focus,
+button:focus-visible,
+button:focus-within {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove focus borders from specific button types */
+.comment-button:focus,
+.carousel-nav-btn:focus,
+.modal-close-btn:focus,
+.popup-nav-btn:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+} 

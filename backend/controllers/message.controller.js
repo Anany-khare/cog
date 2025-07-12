@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> d997b8b (Initial commit: project ready for deployment)
 import {Conversation} from "../models/conversation.model.js";
 // import { getReceiverSocketId, io } from "../socket/socket.js";
 import {Message} from "../models/message.model.js"
@@ -27,6 +30,7 @@ export const sendMessage = async (req,res) => {
 
         await Promise.all([conversation.save(),newMessage.save()])
 
+<<<<<<< HEAD
         // implement socket io for real time data transfer
 
         // const receiverSocketId = getReceiverSocketId(receiverId);
@@ -34,12 +38,22 @@ export const sendMessage = async (req,res) => {
         //     io.to(receiverSocketId).emit('newMessage', newMessage);
         // }
 
+=======
+>>>>>>> d997b8b (Initial commit: project ready for deployment)
         return res.status(201).json({
             success:true,
             newMessage
         })
     } catch (error) {
         console.log(error);
+<<<<<<< HEAD
+=======
+        return res.status(500).json({
+            message:"Something went wrong while sending message.",
+            success:false,
+            error: error.message
+        });
+>>>>>>> d997b8b (Initial commit: project ready for deployment)
     }
 }
 export const getMessage = async (req,res) => {
@@ -55,5 +69,13 @@ export const getMessage = async (req,res) => {
         
     } catch (error) {
         console.log(error);
+<<<<<<< HEAD
+=======
+        return res.status(500).json({
+            message:"Something went wrong while getting messages.",
+            success:false,
+            error: error.message
+        });
+>>>>>>> d997b8b (Initial commit: project ready for deployment)
     }
 }

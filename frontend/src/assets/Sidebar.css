@@ -1,0 +1,89 @@
+:root {
+    --sidebar-bg: #1f2937; /* Dark Card Background */
+    --sidebar-text: #f9fafb; /* White Text */
+    --sidebar-text-hover: #f97316; /* Orange Accent */
+    --sidebar-secondary-text: #9ca3af;
+    --sidebar-border: #374151; /* Darker Border */
+}
+
+.sidebar-container {
+    padding: 0; /* Remove padding for edge-to-edge card */
+    height: 100%;
+    background-color: transparent; /* Make container transparent */
+    border-right: none; /* Remove border */
+}
+
+.sidebar-card {
+    background-color: var(--sidebar-bg);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    height: 100%;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.sidebar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-list-item {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.sidebar-link:hover {
+    background-color: #eef2ff;
+}
+
+.item-name {
+    font-weight: 600;
+    color: var(--sidebar-text-hover);
+    display: block;
+    font-size: 1rem;
+}
+
+.sidebar-link:hover .item-name {
+    color: var(--sidebar-text-hover);
+}
+
+.item-tier {
+    font-size: 0.875rem;
+    color: var(--sidebar-secondary-text);
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--sidebar-border);
+}
+
+.profile-avatar-sidebar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid #ffffff;
+}
+
+.profile-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--sidebar-text);
+} 
