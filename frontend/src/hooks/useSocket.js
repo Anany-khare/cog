@@ -6,7 +6,7 @@ const useSocket = () => {
 
   useEffect(() => {
     // Create socket connection
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'https://cog-csr2.onrender.com';
     socketRef.current = io(backendUrl, {
       withCredentials: true,
     });

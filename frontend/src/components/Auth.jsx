@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../assets/auth.css';  
 import { useDispatch } from 'react-redux';
 import { setAuthUser } from '../redux/authSlice';
+import API from '../api'; // Import the API instance
 
 function Auth() {
   const [isRightPanelActive, setRightPanelActive] = useState(false);
@@ -40,17 +41,13 @@ function Auth() {
     setError(null);
 
     try {
-      const res = await axios.post('http://localhost:8000/api/v1/user/register', signUpData, {
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      if (!res.data.success) {
-        setError('Sign up failed. Please try again.');
-      } else {
-        setRightPanelActive(false);
+      const res = await API.post('/api/v1/user/register', signUpData);
+      if (res.data.status) {
+        alert('Registration successful!');
+        setIsSignUp(false);
       }
     } catch (error) {
-      setError('Sign up failed. Please try again.');
+      alert(error.response?.data?.message || 'Registration failed');
     }
     setLoading(false);
   };
@@ -61,20 +58,12 @@ function Auth() {
     setError(null);
 
     try {
-      const res = await axios.post('http://localhost:8000/api/v1/user/login', signInData, {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      });
-
-      if (res.data.success) {
-        document.cookie = `user=${encodeURIComponent(JSON.stringify(res.data.user))}; path=/`;
-        dispatch(setAuthUser(res.data.user));
-        navigate('/homePage');
-      } else {
-        setError('Invalid credentials.');
+      const res = await API.post('/api/v1/user/login', signInData);
+      if (res.data.status) {
+        navigate('/homepage');
       }
     } catch (error) {
-      setError('Sign in failed. Please try again.');
+      alert(error.response?.data?.message || 'Login failed');
     }
     setLoading(false);
   };
