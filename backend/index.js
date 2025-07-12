@@ -17,7 +17,7 @@ import recruitmentRoutes from "./routes/recruitment.route.js";
 const app = express();
 const server = createServer(app);
 
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://gameverse-cog.vercel.app';
 
 // Socket.IO setup with CORS
 const io = new Server(server, {
