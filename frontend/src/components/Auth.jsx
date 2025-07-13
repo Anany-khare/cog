@@ -42,12 +42,15 @@ function Auth() {
 
     try {
       const res = await API.post('/api/v1/user/register', signUpData);
-      if (res.data.status) {
+      if (res.data.success) { // Changed from status to success
         alert('Registration successful!');
-        setIsSignUp(false);
+        setRightPanelActive(false); // Changed from setIsSignUp
+        setSignUpData({ username: '', email: '', password: '', role: '' }); // Reset form
       }
     } catch (error) {
-      alert(error.response?.data?.message || 'Registration failed');
+      const errorMessage = error.response?.data?.message || 'Registration failed';
+      setError(errorMessage);
+      alert(errorMessage);
     }
     setLoading(false);
   };
@@ -59,11 +62,33 @@ function Auth() {
 
     try {
       const res = await API.post('/api/v1/user/login', signInData);
-      if (res.data.status) {
-        navigate('/homepage');
+      console.log('Login response:', res.data); // Debug log
+      
+      if (res.data.success) { // Changed from status to success
+        // Set user in Redux
+        dispatch(setAuthUser(res.data.user));
+        
+        // Store token in localStorage if needed
+        if (res.data.token) {
+          localStorage.setItem('token', res.data.token);
+        }
+        
+        // Navigate based on user role
+        if (res.data.user.role === 'gamer') {
+          navigate('/homePageGamer');
+        } else if (res.data.user.role === 'host') {
+          navigate('/homePageHost');
+        } else if (res.data.user.role === 'org') {
+          navigate('/homePageOrg');
+        } else {
+          navigate('/homePage'); // Fallback
+        }
       }
     } catch (error) {
-      alert(error.response?.data?.message || 'Login failed');
+      console.error('Login error:', error); // Debug log
+      const errorMessage = error.response?.data?.message || 'Login failed';
+      setError(errorMessage);
+      alert(errorMessage);
     }
     setLoading(false);
   };
@@ -79,10 +104,10 @@ function Auth() {
         <div className="form-container sign-up-container">
           <form onSubmit={handleSignUpSubmit}>
             <h1>Create Account</h1>
-            <input type="text" placeholder="Username" name="username" value={signUpData.username} onChange={handleSignUpChange} />
-            <input type="email" placeholder="Email" name="email" value={signUpData.email} onChange={handleSignUpChange} />
-            <input type="password" placeholder="Password" name="password" value={signUpData.password} onChange={handleSignUpChange} />
-            <select name="role" value={signUpData.role} onChange={handleSignUpChange}>
+            <input type="text" placeholder="Username" name="username" value={signUpData.username} onChange={handleSignUpChange} required />
+            <input type="email" placeholder="Email" name="email" value={signUpData.email} onChange={handleSignUpChange} required />
+            <input type="password" placeholder="Password" name="password" value={signUpData.password} onChange={handleSignUpChange} required />
+            <select name="role" value={signUpData.role} onChange={handleSignUpChange} required>
               <option value="" disabled>Select Role</option>
               <option value="org">ORG</option>
               <option value="gamer">GAMER</option>
@@ -95,8 +120,8 @@ function Auth() {
         <div className="form-container sign-in-container">
           <form onSubmit={handleSignInSubmit}>
             <h1>Sign in</h1>
-            <input type="email" placeholder="Email" name="email" value={signInData.email} onChange={handleSignInChange} />
-            <input type="password" placeholder="Password" name="password" value={signInData.password} onChange={handleSignInChange} />
+            <input type="email" placeholder="Email" name="email" value={signInData.email} onChange={handleSignInChange} required />
+            <input type="password" placeholder="Password" name="password" value={signInData.password} onChange={handleSignInChange} required />
             <button type="submit" disabled={loading}>{loading ? 'Signing In...' : 'Sign In'}</button>
             {error && <p className="error-message">{error}</p>}
           </form>

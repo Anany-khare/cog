@@ -20,7 +20,6 @@ const server = createServer(app);
 // Define allowed origins
 const allowedOrigins = [
   'http://localhost:5173',
-  'http://localhost:3000',
   'https://gameverse-cog.vercel.app',
   'https://gameverse-cog.vercel.app/',
   process.env.FRONTEND_URL
@@ -86,7 +85,7 @@ io.on('connection', (socket) => {
 // Make io available to routes
 app.set('io', io);
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 
 connectDB().then(() => {
   server.listen(PORT, () => {

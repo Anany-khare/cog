@@ -42,6 +42,8 @@ export const register = async(req,res) =>{
 export const login = async(req,res) =>{
     try {
         const {email,password} = req.body
+        console.log('Login attempt for email:', email); // Debug log
+        
         if(!email || !password){
             return res.status(401).json({
                 message:"Enter all details to Login", 
@@ -90,15 +92,27 @@ export const login = async(req,res) =>{
             gameDetails: user.gameDetails,
         };
 
-        return res.status(200).cookie("token",token,{httpOnly:true, sameSite:"lax"}).json({
-            message:`Hello ${user.username}, Welcome back!`,
-            success:true,
-            user: userResponse,
-            token: token // Include token in response for localStorage
-        })
+        // Set cookie with proper settings for cross-origin
+        const cookieOptions = {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // true in production
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
+        };
+
+        console.log('Setting cookie with options:', cookieOptions); // Debug log
+
+        return res.status(200)
+            .cookie("token", token, cookieOptions)
+            .json({
+                message: `Hello ${user.username}, Welcome back!`,
+                success: true,
+                user: userResponse,
+                token: token // Include token in response for localStorage
+            });
           
     } catch(error){
-        console.error(error);
+        console.error('Login error:', error);
         return res.status(500).json({
           message: "Something went wrong during login.",
           success: false,
