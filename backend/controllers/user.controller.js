@@ -147,11 +147,39 @@ export const getProfile = async (req, res) => {
 };
 export const logout = async (req, res) => {
     try {
-      res.cookie('token', '', { httpOnly: true, sameSite: 'lax', maxAge: 0 }); // Clear the token cookie
-      res.cookie('user', '', { httpOnly: false, sameSite: 'lax', maxAge: 0 }); // Clear the user cookie
-      return res.json({ message: 'Logout successful', status: true });
+      console.log('Logout attempt from user:', req.user?.username); // Debug log
+      
+      // Use the same cookie options as login for consistency
+      const cookieOptions = {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', // true in production
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        maxAge: 0, // Expire immediately
+      };
+
+      console.log('Clearing cookies with options:', cookieOptions); // Debug log
+
+      // Clear the token cookie
+      res.cookie('token', '', cookieOptions);
+      
+      // Clear any user cookie if it exists
+      res.cookie('user', '', { 
+        httpOnly: false, 
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        maxAge: 0 
+      });
+      
+      return res.json({ 
+        message: 'Logout successful', 
+        success: true // Changed from status to success for consistency
+      });
     } catch (error) {
-      return res.status(500).json({ message: 'Logout failed', status: false });
+      console.error('Logout error:', error);
+      return res.status(500).json({ 
+        message: 'Logout failed', 
+        success: false // Changed from status to success for consistency
+      });
     }
   };
   

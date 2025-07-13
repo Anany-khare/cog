@@ -26,13 +26,29 @@ const getToken = () => {
 
 // Utility function to logout user
 export const logoutUser = () => {
+    console.log('Logging out user...'); // Debug log
+    
+    // Clear localStorage
     localStorage.removeItem('token');
+    
+    // Clear any cookies
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    
     // Dispatch logout action if store is available
     if (window.store) {
-        window.store.dispatch({ type: 'auth/logout' });
+        try {
+            // Dispatch logout action directly
+            window.store.dispatch({ type: 'auth/logout' });
+        } catch (error) {
+            console.log('Error dispatching logout action:', error);
+        }
+    } else {
+        console.log('Store not available, skipping Redux logout');
     }
+    
     // Redirect to login page
-    window.location.href = '/login';
+    window.location.href = '/';
 };
 
 // Utility function to validate token periodically

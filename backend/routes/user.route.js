@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.route('/register').post(register);
 router.route('/login').post(login);
-router.route('/logout').get(logout);
+router.route('/logout').get(isAuthenticated, logout); // Added authentication middleware
 router.route('/profile/me').get(isAuthenticated, (req, res) => {
   req.params.id = req.user._id;
   return getProfile(req, res);
