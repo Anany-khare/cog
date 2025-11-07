@@ -74,11 +74,12 @@ let activeUsers = 0;
 
 io.on('connection', (socket) => {
   activeUsers++;
-  console.log(`User connected. Active users: ${activeUsers}`);
+  // console.log(`User connected. Active users: ${activeUsers}`);
+  // further can be used for real time notifications and load balancing
   
   socket.on('disconnect', () => {
     activeUsers--;
-    console.log(`User disconnected. Active users: ${activeUsers}`);
+    // console.log(`User disconnected. Active users: ${activeUsers}`);
   });
 });
 
